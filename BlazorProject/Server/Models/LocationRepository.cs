@@ -9,32 +9,27 @@ namespace BlazorProject.Server.Models
 {
     public class LocationRepository : ILocationRepository
     {
-            private readonly AppDbContext appDbContext;
+        private readonly AppDbContext appDbContext;
 
-            public LocationRepository(AppDbContext appDbContext)
-            {
-                this.appDbContext = appDbContext;
-            }
-
-            public async Task<Location> GetLocation(int locationId)
-            {
-                return await appDbContext.Location
-                    .FirstOrDefaultAsync(d => d.LocationId == locationId);
-            }
-
-            public async Task<IEnumerable<Location>> GetLocations()
-            {
-                return await appDbContext.Location.ToListAsync();
-            }
-
-        public async Task<LocationDto> GetLocationDto()
+        public LocationRepository(AppDbContext appDbContext)
         {
-            
+            this.appDbContext = appDbContext;
         }
 
-         public async Task<Location> AddLocation(Location location)
+        public async Task<Location> GetLocation(int locationId)
+        {
+            return await appDbContext.Location
+                .FirstOrDefaultAsync(d => d.LocationId == locationId);
+        }
 
-         {
+        public async Task<IEnumerable<Location>> GetLocations()
+        {
+            return await appDbContext.Location.ToListAsync();
+        }
+
+        public async Task<Location> AddLocation(Location location)
+
+        {
             if (location != null)
             {
                 appDbContext.Entry(location).State = EntityState.Unchanged;
@@ -43,7 +38,7 @@ namespace BlazorProject.Server.Models
             var result = await appDbContext.Location.AddAsync(location);
             await appDbContext.SaveChangesAsync();
             return result.Entity;
-         }
+        }
 
         public async Task<Location> UpdateLocation(Location location)
         {

@@ -70,18 +70,18 @@ namespace BlazorProject.Server.Controllers
         {
             try
             {
-                var getDto = await locationRepository.GetLocationDto(id);
-                if (getDto == null)
+                var location = await locationRepository.GetLocation(id);
+                if (location == null)
                 {
                     return NotFound();
                 }
-                var LocationDto = new LocationDto
+
+                var locationDto = new LocationDto
                 {
-                    LocationId = getDto.LocationId,
-                    LocationName = getDto.LocationName,
+                    LocationId = location.LocationId,
+                    LocationName = location.LocationName,
                 };
-                return Ok(LocationDto);
-                
+                return Ok(locationDto);
             }
             
             catch (Exception)

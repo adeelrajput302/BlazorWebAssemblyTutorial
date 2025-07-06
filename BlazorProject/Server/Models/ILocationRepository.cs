@@ -8,7 +8,6 @@ namespace BlazorProject.Server.Models
     {
 
         Task<IEnumerable<Location>> GetLocations();
-        Task<LocationDto> GetLocationDto(int locationId);
         Task<Location> GetLocation(int locationId);
         Task<Location> AddLocation(Location location);
         Task<Location> UpdateLocation(Location location);
